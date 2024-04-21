@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - ASPMVCEDU</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/ASPMVCEDU.styles.css" asp-append-version="true" />
+</head>
+<body style="background-image: linear-gradient(62deg, #85FFBD, #FFFB7D)">
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-dark box-shadow mb-3">
+            <div class="container-fluid">  
+                <div class="dropdown ml-auto">
+                    <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Работа с
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Classes" asp-action="Index">Занятиями</a>
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Courses" asp-action="Index">Курсами</a>
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Registrations" asp-action="Index">Записями</a>
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Students" asp-action="Index">Студентами</a>
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Teachers" asp-action="Index">Преподавателями</a>
+                    </div>
+                </div>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-end">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">Домашняя страница</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

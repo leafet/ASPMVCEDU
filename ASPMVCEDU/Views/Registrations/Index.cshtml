@@ -1,0 +1,31 @@
+﻿@using ASPMVCEDU.Models
+@model List<RegistrationViewModel>
+
+<h1>Записи</h1>
+<a class="btn btn-primary" asp-controller="Registrations" asp-action="Insert" style="margin-top:5px; margin-bottom:5px;">Записать студента на занятие</a>
+
+<div class="table-responsive">
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>Преподаваемый курс</th>
+                <th>Имя и фамилия студента</th>
+                <th>Дата регистрации</th>
+                <th>Оценка</th>
+                <th>Действия</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var registration in Model)
+            {
+                <tr>
+                    <td>@registration.CourseName - @registration.TeacherFirstName @registration.TeacherLastName</td>
+                    <td>@registration.StudentFirstName @registration.StudentLastName</td>
+                    <td>@registration.RegistrationDate</td>
+                    <td>@registration.Mark</td>
+                    <td><a class="btn btn-danger btn-sm" style="margin: 0.2em" asp-action="Remove" asp-route-id="@registration.RegistrationId">Удалить</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,30 @@
+﻿@using ASPMVCEDU.Models
+@model List<ClassViewModel>
+
+<h1>Занятия</h1>
+
+<div class="table-responsive">
+    <table class="table table-striped table-hover ">
+        <thead>
+            <tr>
+                <th>Название курса</th>
+                <th>Имя и фамилия преподавателя</th>
+                <th>Дата начала</th>
+                <th>Дата конца</th>
+                <th>Продолжительность (часов)</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var clas in Model)
+            {
+                <tr>
+                    <td>@clas.Course.CourseName</td>
+                    <td>@clas.Teacher.FirstName @clas.Teacher.LastName</td>
+                    <td>@clas.StartDate.ToString()</td>
+                    <td>@clas.EndDate.ToString()</td>
+                    <td>@clas.Duration</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,59 @@
+﻿@using ASPMVCEDU.Models
+@using ASPMVCEDU.Data
+@model RegistrationViewModel
+@inject ApplicationDbContext _ctx;
+
+@{
+    var classes = new List<SelectListItem> { };
+    classes.AddRange(
+        from item in _ctx.Classes
+        select new SelectListItem
+        {
+            Text = item.Teacher.FirstName + " " + item.Teacher.LastName + " " + item.Course.CourseName,
+            Value = item.ClassId.ToString()
+        }
+    );
+
+    var students = new List<SelectListItem> { };
+    students.AddRange(
+        from item in _ctx.Students
+        select new SelectListItem
+                {
+                    Text = item.FirstName + " " + item.LastName,
+                    Value = item.StudentId.ToString()
+                }
+    );
+}
+
+<h1>Записать студента на занятие</h1>
+
+<div class="table-responsive">
+    <form asp-action="Insert">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group" style="margin-bottom:10px">
+            <label asp-for="ClassID" class="control-label"></label>
+            <select asp-for="ClassID" class="form-control" asp-items="@classes">
+            </select>
+            <span asp-validation-for="ClassID" class="text-danger"></span>
+        </div>
+        <div class="form-group" style="margin-bottom:10px">
+            <label asp-for="StudentID" class="control-label"></label>
+            <select asp-for="StudentID" class="form-control" asp-items="@students">  
+            </select>
+            <span asp-validation-for="StudentID" class="text-danger"></span>
+        </div>
+        <div class="form-group" style="margin-bottom:10px">
+            <label asp-for="RegistrationDate" class="control-label"></label>
+            <input asp-for="RegistrationDate" class="form-control" />
+            <span asp-validation-for="RegistrationDate" class="text-danger"></span>
+        </div>
+        <div class="form-group" style="margin-bottom:10px">
+            <label asp-for="Mark" class="control-label"></label>
+            <input asp-for="Mark" class="form-control" />
+            <span asp-validation-for="Mark" class="text-danger"></span>
+        </div>
+        <div class="form-group" style="margin-bottom:10px">
+           <button type="submit" class="btn btn-primary">Добавить</button>
+        </div>
+    </form>
+</div>

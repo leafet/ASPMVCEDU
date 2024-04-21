@@ -1,0 +1,33 @@
+﻿@using ASPMVCEDU.Models
+@model List<TeacherViewModel>
+
+<h1>Преподаватели</h1>
+<a class="btn btn-primary" asp-controller="Teachers" asp-action="Insert" style="margin-top:5px; margin-bottom:5px;">Добавить преподавателя</a>
+
+<div class="table-responsive">
+    <table class="table table-striped table-hover table-secondary table-borderless">
+        <thead>
+            <tr>
+                <th>Имя</th>
+                <th>Фамилия</th>
+                <th>Специальность</th>
+                <th>E-Mail</th>
+                <th>Телефон</th>
+                <th>Действия</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var teacher in Model)
+            {
+                <tr>
+                    <td>@teacher.FirstName</td>
+                    <td>@teacher.LastName</td>
+                    <td>@teacher.Specialisation</td>
+                    <td>@teacher.Email</td>
+                    <td>@teacher.Phone</td>
+                    <td><a class="btn btn-danger btn-sm" style="margin: 0.2em" asp-action="Remove" asp-route-id="@teacher.TeacherId">Удалить</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
