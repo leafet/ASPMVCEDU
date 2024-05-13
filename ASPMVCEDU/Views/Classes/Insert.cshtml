@@ -1,0 +1,64 @@
+﻿@using ASPMVCEDU.Models
+@using ASPMVCEDU.Data
+@model ClassViewModel
+@inject ApplicationDbContext _ctx;
+
+@{
+    var courses = new List<SelectListItem> { };
+    courses.AddRange(
+        from item in _ctx.Courses
+        select new SelectListItem
+        {
+            Text = item.CourseName,
+            Value = item.CourseId.ToString()
+        }
+    );
+
+    var teachers = new List<SelectListItem> { };
+    teachers.AddRange(
+        from item in _ctx.Teachers
+        select new SelectListItem
+                {
+                    Text = item.FirstName + " " + item.LastName,
+                    Value = item.TeacherId.ToString()
+                }
+    );
+}
+
+<h1>Записать студента на занятие</h1>
+
+<div class="table-responsive">
+    <form asp-action="Insert">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group" style="margin-bottom:10px">
+            <label asp-for="TeacherId" class="control-label"></label>
+            <select asp-for="TeacherId" class="form-control" asp-items="@teachers">
+            </select>
+            <span asp-validation-for="TeacherId" class="text-danger"></span>
+        </div>
+        <div class="form-group" style="margin-bottom:10px">
+            <label asp-for="CourseId" class="control-label"></label>
+            <select asp-for="CourseId" class="form-control" asp-items="@courses">  
+            </select>
+            <span asp-validation-for="ClassId" class="text-danger"></span>
+        </div>
+        <div class="form-group" style="margin-bottom:10px">
+            <label asp-for="StartDate" class="control-label"></label>
+            <input asp-for="StartDate" class="form-control" />
+            <span asp-validation-for="StartDate" class="text-danger"></span>
+        </div>
+        <div class="form-group" style="margin-bottom:10px">
+            <label asp-for="EndDate" class="control-label"></label>
+            <input asp-for="EndDate" class="form-control" />
+            <span asp-validation-for="EndDate" class="text-danger"></span>
+        </div>
+        <div class="form-group" style="margin-bottom:10px">
+            <label asp-for="Duration" class="control-label"></label>
+            <input asp-for="Duration" class="form-control" />
+            <span asp-validation-for="Duration" class="text-danger"></span>
+        </div>
+        <div class="form-group" style="margin-bottom:10px">
+           <button type="submit" class="btn btn-primary">Добавить</button>
+        </div>
+    </form>
+</div>

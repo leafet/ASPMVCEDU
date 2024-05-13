@@ -2,6 +2,7 @@
 @model List<ClassViewModel>
 
 <h1>Занятия</h1>
+<a class="btn btn-primary" asp-controller="Classes" asp-action="Insert" style="margin-top:5px; margin-bottom:5px;">Создать занятие</a>
 
 <div class="table-responsive">
     <table class="table table-striped table-hover ">
@@ -12,6 +13,7 @@
                 <th>Дата начала</th>
                 <th>Дата конца</th>
                 <th>Продолжительность (часов)</th>
+                <th>Действия</th>
             </tr>
         </thead>
         <tbody>
@@ -23,6 +25,7 @@
                     <td>@clas.StartDate.ToString()</td>
                     <td>@clas.EndDate.ToString()</td>
                     <td>@clas.Duration</td>
+                    <td><a class="btn btn-danger btn-sm" style="margin: 0.2em" asp-action="Remove" asp-route-id="@clas.ClassId">Удалить</a></td>
                 </tr>
             }
         </tbody>

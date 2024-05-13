@@ -9,7 +9,7 @@
         from item in _ctx.Classes
         select new SelectListItem
         {
-            Text = item.Teacher.FirstName + " " + item.Teacher.LastName + " " + item.Course.CourseName,
+            Text = item.Teacher.FirstName + " " + item.Teacher.LastName + " | " + item.Course.CourseName,
             Value = item.ClassId.ToString()
         }
     );

@@ -33,6 +33,47 @@ namespace ASPMVCEDU.Controllers
             return View(classViewModel);
         }
 
+        [HttpGet]
+        public IActionResult Insert()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Insert(ClassViewModel classView)
+        {
+            if (ctx.Courses.Find(classView.CourseId) != null && ctx.Teachers.Find(classView.TeacherId) != null)
+            {
+                var clas = new Class
+                {
+                    Course = ctx.Courses.Find(classView.CourseId)!,
+                    Teacher = ctx.Teachers.Find(classView.TeacherId)!,
+                    StartDate = classView.StartDate,
+                    EndDate = classView.EndDate,
+                    Duration = classView.Duration
+                };
+
+                ctx.Classes.Add(clas);
+                ctx.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View(classView);
+            }
+
+
+        }
+
+        public IActionResult Remove(int id)
+        {
+            var model = ctx.Classes.Find(id);
+            ctx.Classes.Remove(model!);
+            ctx.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
